@@ -1,0 +1,85 @@
+﻿@model DslrCustomerRecord.ViewModels.EditCustomerDetailsViewModel
+
+@{
+    
+}
+<form enctype="multipart/form-data" asp-controller="Home" asp-action="EditCustomerDetails" method="post">
+
+    <div>
+        <label asp-for="@Model.modelId">Camera Model:</label>
+        <select asp-for="@Model.modelId">
+            <option value="">Select a Camera</option>
+            @foreach (var cam in ViewBag.ModelList)
+            {
+                <option value="@cam.Value">@cam.Text</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="@Model.modelId"></span>
+    </div>
+   
+    
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-group">
+                <label class="form-label" asp-for="@Model.name">Customer Name</label>
+                <input asp-for="@Model.name" class="form-control" />
+                
+                <span class="text-danger" asp-validation-for="@Model.name" style="color: red;"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <label class="form-label" asp-for="@Model.number">Contact Number</label>
+                <input asp-for="@Model.number" class="form-control" />
+               
+                <span class="text-danger" asp-validation-for="@Model.number" style="color: red;"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-outline mb-4">
+        <label class="form-label" asp-for="@Model.address">Address</label>
+        <input asp-for="@Model.address" class="form-control" />
+        
+       
+        <span class="text-danger" asp-validation-for="@Model.address" style="color: red;"></span>
+    </div>
+
+
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline">
+                <label class="form-label" asp-for="@Model.rentHour">Rent Hour</label>
+                <input type="number" asp-for="@Model.rentHour" class="form-control" />
+               
+                <span class="text-danger" asp-validation-for="@Model.rentHour" style="color: red;"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <label class="form-label" asp-for="@Model.rentMinute">Rent Minute</label>
+                <input type="number" asp-for="@Model.rentMinute" class="form-control" />
+               
+                <span class="text-danger" asp-validation-for="@Model.rentMinute" style="color: red;"></span>
+            </div>
+        </div>
+    </div>
+
+    <!--Rent Cost Details-->
+    <div class="form-outline mb-4">
+        <label class="form-label" asp-for="@Model.totalPrice">Rent Cost</label>
+        <input type="number" asp-for="@Model.totalPrice" class="form-control" />
+        
+        <span class="text-danger" asp-validation-for="@Model.totalPrice" style="color: red;"></span>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

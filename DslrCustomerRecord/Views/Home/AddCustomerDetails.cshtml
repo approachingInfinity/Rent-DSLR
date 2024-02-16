@@ -1,0 +1,91 @@
+﻿@model DslrCustomerRecord.ViewModels.AddOrEditViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form enctype="multipart/form-data" method="post" asp-controller="Home" asp-action="AddCustomerDetails">
+  
+    
+          <div>
+        <label asp-for="@Model.modelId">Camera Model:</label>
+        <select asp-for="@Model.modelId">
+            <option value="">Select a Camera</option>
+                @foreach (var cam in ViewBag.CustList)
+                {
+                    <option value="@cam.Value">@cam.Text</option>
+                }
+        </select>
+        <span class="text-danger" asp-validation-for="@Model.modelId"></span>
+    </div>
+    
+    <br />
+    <!--Customer Details-->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline">
+                <input placeholder="Enter Customers Name" asp-for="@Model.name" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.name"></span>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-outline">
+                <input placeholder="Enter Contact Number" asp-for="@Model.number" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.number"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-outline mb-4">
+
+        <input placeholder="Enter Address" asp-for="@Model.address" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.address"></span>
+    </div>
+
+    <!--Rent Duration Details-->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline">
+                <input placeholder="Rent Hour" type="number" asp-for="@Model.rentHour" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.rentHour"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <input placeholder="Rent Minute" type="number" asp-for="@Model.rentMinute" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.rentMinute"></span>
+            </div>
+        </div>
+    </div>
+
+    <!--Rent Cost Details-->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="col">
+                <input placeholder="Rent Cost" type="number" asp-for="@Model.totalPrice" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.totalPrice"></span>
+            </div>
+            
+        </div>
+     <div class="col">
+            <div class="col">
+                <input placeholder="due" type="number" asp-for="@Model.due" class="form-control" />
+                <span class="text-danger" asp-validation-for="@Model.due"></span>
+         </div>
+            
+     </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Create</button>
+
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

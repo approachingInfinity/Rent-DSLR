@@ -1,0 +1,122 @@
+﻿@inject SignInManager<IdentityUser> signInmanager;
+@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DCR</title>
+    <environment include="Production">
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </environment>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DCR</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                      
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddCustomerDetails">
+                                <img src="~/images/add.png" alt="Add Customers"  style="cursor: pointer;width:1.2rem;height:1.2rem;">
+
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllCustomers">
+                                <img src="~/images/all.png" alt="All Customers" style="cursor: pointer;width:1.2rem;height:1.2rem;">
+
+                            </a>
+                        </li>
+
+                        
+
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    @{
+                        string search = ViewBag.search;
+                    }
+                    <form method="post" asp-controller="Home" asp-action="Index" class="search-form">
+                        <div>
+                            <input asp-for="@search" />
+                            <span asp-validation-for="@search" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit">search</button>
+                    </form>
+
+                </li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <li class="nav-item">
+                        <form method="post" asp-controller="Account" asp-action="Logout" style="display: inline;">
+                            <button type="submit" style="display: none;">
+                                Logout: @User.Identity.Name
+                            </button>
+                            <img src="~/images/logout.png" alt="Logout" onclick="this.parentNode.submit();" style="cursor: pointer;width:4rem;height:4rem;">
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="register">
+                            Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="account" asp-action="login">
+                            Login
+                        </a>
+                    </li>
+                }
+                
+
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - DCR - 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

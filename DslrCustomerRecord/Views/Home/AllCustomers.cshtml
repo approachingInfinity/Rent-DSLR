@@ -1,0 +1,748 @@
+﻿@model DslrCustomerRecord.ViewModels.CustomerByMonthViewModel
+@inject SignInManager<IdentityUser> signInmanager;
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            if(@Model.customerDetailsByMonth.ElementAt(0).Count()==0){
+             $('#divJan').hide();
+            }else{
+                $('#divJan').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(1).Count()== 0) {
+                $('#divFeb').hide();
+            } else {
+                $('#divFeb').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(2).Count()== 0) {
+                $('#divMarch').hide();
+            } else {
+                $('#divMarch').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(3).Count()== 0) {
+                $('#divApril').hide();
+            } else {
+                $('#divApril').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(4).Count()== 0) {
+                $('#divMay').hide();
+            } else {
+                $('#divMay').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(5).Count()== 0) {
+                $('#divJun').hide();
+            } else {
+                $('#divJun').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(6).Count()== 0) {
+                $('#divJul').hide();
+            } else {
+                $('#divJul').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(7).Count()== 0) {
+                $('#divAug').hide();
+            } else {
+                $('#divAug').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(8).Count()== 0) {
+                $('#divSep').hide();
+            } else {
+                $('#divSep').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(9).Count()== 0) {
+                $('#divOct').hide();
+            } else {
+                $('#divOct').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(10).Count()== 0) {
+                $('#divNov').hide();
+            } else {
+                $('#divNov').show();
+            }
+
+            if (@Model.customerDetailsByMonth.ElementAt(11).Count()== 0) {
+                $('#divDec').hide();
+            } else {
+                $('#divDec').show();
+            }
+        });
+
+    </script>
+</head>
+
+
+<div class="table-responsive" id="divJan">
+  
+    <h4>January</h4>
+   
+    <table class="table table-bordered border-primary">
+       
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            @if (signInmanager.IsSignedIn(User))
+            {
+                 <th>Contact</th>
+            }
+           
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(0))
+        {
+           
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                @if (signInmanager.IsSignedIn(User))
+                {
+                    <th>@cust.number</th>
+                }
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+      
+    </table><br />
+    jaunuary's earnings: @Model.totalEarningsByMonth.ElementAt(0)
+
+    </div> 
+
+<div class="table-responsive" id="divFeb">
+
+    <h4>February</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(1))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    february's earnings: @Model.totalEarningsByMonth.ElementAt(1)
+
+</div> 
+<div class="table-responsive" id="divMarch">
+
+    <h4>March</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(2))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    march's earnings: @Model.totalEarningsByMonth.ElementAt(2)
+
+</div> 
+
+<div class="table-responsive" id="divApril">
+
+    <h4>April</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(3))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    april's earnings: @Model.totalEarningsByMonth.ElementAt(3)
+
+</div> 
+
+<div class="table-responsive" id="divMay">
+
+    <h3>May</h3>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(4))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    may's earnings: @Model.totalEarningsByMonth.ElementAt(4)
+
+</div> 
+
+<div class="table-responsive" id="divJun">
+
+    <h4>June</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(5))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    june's earnings: @Model.totalEarningsByMonth.ElementAt(5)
+
+</div> 
+
+<div class="table-responsive" id="divJul">
+
+    <h4>July</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(6))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table><br />
+    july's earnings: @Model.totalEarningsByMonth.ElementAt(6)
+
+</div> 
+
+<div class="table-responsive" id="divAug">
+
+    <h4>August</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(7))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table>
+    august's earnings: @Model.totalEarningsByMonth.ElementAt(7)
+
+</div> <br />
+
+<div class="table-responsive" id="divSep">
+
+    <h4>September</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(8))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table>
+    september's earnings: @Model.totalEarningsByMonth.ElementAt(8)
+
+</div> <br />
+
+<div class="table-responsive" id="divOct">
+
+    <h4>October</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(9))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table>
+    october's earnings: @Model.totalEarningsByMonth.ElementAt(9)
+
+</div> <br />
+
+<div class="table-responsive" id="divNov">
+
+    <h4>November</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th></>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(10))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+
+                <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table>
+    <p>
+       november's earnings: @Model.totalEarningsByMonth.ElementAt(10)
+    </p>
+</div> <br />
+
+<div class="table-responsive" id="divDec">
+
+    <h4>December</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Call</th>
+        </tr>
+
+        @foreach (var cust in Model.customerDetailsByMonth.ElementAt(11))
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                <th>@cust.number</th>
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                
+                <th>
+                  @{  string contact = "tel:+91" + cust.number;}
+                    <a href="@contact">Call</a>
+                </th>
+            </tr>
+        }
+
+
+    </table>
+    december's earnings: @Model.totalEarningsByMonth.ElementAt(11)
+
+</div> <br />
+
+<section>
+    <p>this years earnings: @Model.thisYearsEarnings</p>
+   
+</section>
+
+
+

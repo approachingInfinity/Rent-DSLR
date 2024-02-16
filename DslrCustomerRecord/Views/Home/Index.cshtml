@@ -1,0 +1,121 @@
+﻿@inject SignInManager<IdentityUser> signInmanager;
+
+@model DslrCustomerRecord.ViewModels.ModelPriceViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="table-responsive" id="divDec">
+
+    <h4>December</h4>
+
+    <table class="table table-bordered border-primary">
+        <tr class="table-primaryclass">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            @if (signInmanager.IsSignedIn(User))
+            {
+               <th>Contact</th>  
+            }
+           
+            <th>Camera Name</th>
+            <th>Camera Model</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            @if (signInmanager.IsSignedIn(User))
+            {
+                 <th>Call</th>
+            }
+           
+            <th>due</th>
+        </tr>
+
+        @foreach (var cust in Model.cust)
+        {
+
+            <tr class="table-dark">
+                <th>@cust.id</th>
+                <th>@cust.name</th>
+                <th>@cust.address</th>
+                @if (signInmanager.IsSignedIn(User))
+                {
+                      <th>@cust.number</th>
+                }
+              
+                <th>@cust.camName</th>
+                <th>@cust.camModel</th>
+                <th>@cust.rentHour</th>
+                <th>@cust.rentMinute</th>
+                <th>@cust.totalPrice</th>
+                <th><a asp-controller="Home" asp-action="EditCustomerDetails" asp-route-id="@cust.id">Edit</a></th>
+                <th>
+                    <form method="post" asp-controller="Home" asp-action="DeleteCustomer" asp-route-id="@cust.id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                @if (signInmanager.IsSignedIn(User))
+                {
+                  <th>
+                    @{
+                        string contact = "tel:+91" + cust.number;
+                    }
+                    <a href="@contact">Call</a>
+                </th>
+                }
+            
+
+                <th>@cust.due</th>
+            </tr>
+        }
+
+
+    </table>
+   
+
+</div>
+<br />
+    
+    
+  <br />
+    
+    <div >
+        <h3>Current Month</h3>
+        <table class="table table-bordered border-primary">
+            <tr class="table-primaryclass">
+                <th>Camera Model</th>
+                <th>Total Collection</th>
+                <th>repeatition</th>
+            </tr>
+
+            @foreach (var modelprice in Model.modelPrice)
+            {
+                <tr class="table-dark">
+                    <th>@modelprice.modelName</th>
+                    <th>@modelprice.totalCollection</th>
+                    <th>@modelprice.repeatition</th>
+                </tr>
+            }
+        </table>
+    </div>
+   <br /> <br />
+    <div>
+        <h3>this months total earnings = @Model.totalCollectionThisMonth</h3>
+    
+    </div>
+
+    <br />
+
+    <div>
+        <h3>today's total earnings = @Model.totalCollectionToday</h3>
+        
+    </div>
+
+    <div>
+        <h3>This week's overall earnings= @Model.totalCollectionThisWeek</h3>
+
+    </div>
+    
+
