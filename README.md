@@ -5,28 +5,30 @@ A robust DSLR rental system built using **C#, ASP.NET Core, ADO.NET, and SQL Ser
 ## 🚀 Features
 
 - 📋 **User Management** - Register and store user details securely.
-- 📷 **DSLR Inventory** - Keep track of available DSLR cameras.
 - 💰 **Rental Pricing** - Manage rental costs and durations.
 - 📊 **Rental History** - Track past and ongoing rentals.
 - 🔍 **Search & Filter** - Easily find available DSLRs.
-- 📡 **Real-time Updates** - Stay up-to-date with rental status.
 
 ## 🛠️ Tech Stack
 
 - **Backend:** C#, ASP.NET Core, ADO.NET
 - **Database:** SQL Server
-- **Frontend:** Razor Pages / Blazor (if applicable)
-- **Authentication:** Identity or JWT (if implemented)
+- **Frontend:** Razor Syntex
+- **Authentication:** Identity API
 
 ## 📂 Project Structure
 
 ```bash
 📦 DSLR-Rental-System
-├── 📁 Controllers      # API Controllers
-├── 📁 Models           # Database Models
+├── 📁 Controllers      # Controllers
+├── 📁 DataBaseContext  # DataBase Context
+├── 📁 Migration        # EF Migrations
+├── 📁 Models           # Models
+├── 📁 Properties       # Pulish Profile
+├── 📁 Repositories     # Repository Pattern
+├── 📁 Utilities        # Email Validatoin Utility
+├── 📁 ViewModels       # ViewModels
 ├── 📁 Views            # UI Views (if using Razor)
-├── 📁 Data             # Database Context & Queries
-├── 📁 Services         # Business Logic
 ├── 📁 wwwroot          # Static Files
 ├── 📄 appsettings.json # Configuration
 └── 📄 Program.cs       # Entry Point
